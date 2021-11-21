@@ -2,9 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 import {
   ActivityIndicator,
+  Button,
   Dimensions,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,6 +14,7 @@ import Carousel from 'react-native-snap-carousel';
 import CardMovie from '../components/CardMovie';
 import { HorizontalSlider } from '../components/HorizontalSlider';
 import { useMovies } from '../hooks/useMovies';
+import { useUserState } from '../hooks/useUserState';
 import { RootStackParamsList } from '../navigation/RootStackNavigation';
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -21,6 +24,8 @@ type Props = NativeStackScreenProps<RootStackParamsList, 'HomeScreen'>;
 const HomeScreen: FC<Props> = () => {
   const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
   const { top } = useSafeAreaInsets();
+  const { state, setUsername } = useUserState();
+  console.log(state);
 
   if (isLoading) {
     return (
